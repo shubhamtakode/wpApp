@@ -13,7 +13,6 @@ export class HomePage implements OnInit{
   constructor(public navCtrl: NavController, public siteDataService: SiteDataServiceProvider) {
 
   }
-
   ngOnInit(){
     this.postDataForListing = [];
     this.loadPostData();
@@ -22,8 +21,19 @@ export class HomePage implements OnInit{
   loadPostData(){
     this.siteDataService.getAllPostsDataByPage(this.pageNumber).subscribe(resp => {
       resp.forEach((val : any, key: any) => {
+        this.getAndAssociateMediaUrlToPost(val);
         this.postDataForListing.push(val);
       });
+    });
+  }
+
+
+  getAndAssociateMediaUrlToPost(postData){
+    postData.media_url = "";
+    this.siteDataService.getMediaById(postData.featured_media).subscribe( mediaData => {
+      postData.media_url = mediaData.media_details.sizes.medium.source_url ;
+    }, error => {
+      console.log(error);
     });
   }
 
@@ -34,6 +44,6 @@ export class HomePage implements OnInit{
       this.loadPostData();
       console.log('Async operation has ended');
       infiniteScroll.complete();
-    }, 1000);
+    }, 600);
   }
 }

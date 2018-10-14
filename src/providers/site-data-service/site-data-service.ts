@@ -19,4 +19,14 @@ export class SiteDataServiceProvider {
   getAllPostsDataByPage(pageNumber: number) {
     return this.http.get(this.siteUrl + 'posts/?page='+pageNumber+'&context=embed');
   }
+
+  getPostDataById(postId: number){
+    return this.http.get(this.siteUrl + 'posts/'+postId);
+  }
+
+  getMediaById(mediaId: number){
+    return this.http.get(this.siteUrl + 'media/'+mediaId);
+  }
+
+
 }

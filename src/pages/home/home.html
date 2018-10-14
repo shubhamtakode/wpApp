@@ -1,20 +1,18 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Shubhs Blog</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
  <ion-card *ngFor="let post of postDataForListing">
-   <img src=""/>
+   <img [src]="post.media_url" *ngIf="post.media_url"/>
    <ion-card-content>
-     <ion-card-title>
+     <ion-card-title> {{post.id}} -
       {{post.title.rendered}}
      </ion-card-title>
-     <div [innerHTML]="post.excerpt.rendered">
-
-     </div>
+     <div [innerHTML]="post.excerpt.rendered"></div>
    </ion-card-content>
  </ion-card>
 
