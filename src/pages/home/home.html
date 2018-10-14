@@ -12,8 +12,16 @@
      <ion-card-title> {{post.id}} -
       {{post.title.rendered}}
      </ion-card-title>
-     <div [innerHTML]="post.excerpt.rendered"></div>
+     <p [innerHTML]="post.excerpt.rendered"></p>
    </ion-card-content>
+   <ion-row>
+     <ion-col>
+       <button ion-button icon-start clear small class="pull-right">
+         <ion-icon name="calendar"></ion-icon>
+         <div>{{post.date | date}}</div>
+       </button>
+     </ion-col>
+   </ion-row>
  </ion-card>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)">

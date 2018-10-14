@@ -19,7 +19,7 @@ export class HomePage implements OnInit{
   }
 
   loadPostData(){
-    this.siteDataService.getAllPostsDataByPage(this.pageNumber).subscribe(resp => {
+    this.siteDataService.getAllPostsDataByPage(this.pageNumber).subscribe((resp: any[]) => {
       resp.forEach((val : any, key: any) => {
         this.getAndAssociateMediaUrlToPost(val);
         this.postDataForListing.push(val);
@@ -30,7 +30,7 @@ export class HomePage implements OnInit{
 
   getAndAssociateMediaUrlToPost(postData){
     postData.media_url = "";
-    this.siteDataService.getMediaById(postData.featured_media).subscribe( mediaData => {
+    this.siteDataService.getMediaById(postData.featured_media).subscribe( (mediaData: any) => {
       postData.media_url = mediaData.media_details.sizes.medium.source_url ;
     }, error => {
       console.log(error);
