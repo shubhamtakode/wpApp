@@ -5,16 +5,22 @@
 </ion-header>
 
 <ion-content padding>
- <ion-card>
+
+ <ion-card *ngFor="let post of postDataForListing">
    <img src=""/>
    <ion-card-content>
      <ion-card-title>
-       Nine Inch Nails Live
+      {{post.title.rendered}}
      </ion-card-title>
-     <p>
-       The most popular industrial group ever, and largely
-       responsible for bringing the music to a mass audience.
-     </p>
+     <div [innerHTML]="post.excerpt.rendered">
+
+     </div>
    </ion-card-content>
  </ion-card>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
 </ion-content>

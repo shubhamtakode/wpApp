@@ -16,7 +16,7 @@ export class SiteDataServiceProvider {
     this.siteUrl = "https://www.shubhsblog.com/wp-json/wp/v2/";
   }
 
-  getAllPostsData() {
-    return this.http.get(this.siteUrl + 'posts/?page=2&context=embed');
+  getAllPostsDataByPage(pageNumber: number) {
+    return this.http.get(this.siteUrl + 'posts/?page='+pageNumber+'&context=embed');
   }
 }
