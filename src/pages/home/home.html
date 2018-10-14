@@ -6,7 +6,7 @@
 
 <ion-content padding>
 
- <ion-card *ngFor="let post of postDataForListing">
+ <ion-card *ngFor="let post of postDataForListing" (click)="goToPostDetails(post.id)">
    <img [src]="post.media_url" *ngIf="post.media_url"/>
    <ion-card-content>
      <ion-card-title> {{post.id}} -

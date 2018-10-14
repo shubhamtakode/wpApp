@@ -13,6 +13,8 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SiteDataServiceProvider } from '../providers/site-data-service/site-data-service';
+import {PostDetailsPage} from "../pages/post-details/post-details";
+import {PostDetailsPageModule} from "../pages/post-details/post-details.module";
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { SiteDataServiceProvider } from '../providers/site-data-service/site-dat
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    PostDetailsPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -33,7 +36,8 @@ import { SiteDataServiceProvider } from '../providers/site-data-service/site-dat
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    PostDetailsPage
   ],
   providers: [
     StatusBar,

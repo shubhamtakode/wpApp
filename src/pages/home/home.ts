@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { SiteDataServiceProvider } from '../../providers/site-data-service/site-data-service';
+import {PostDetailsPage} from "../post-details/post-details";
 
 @Component({
   selector: 'page-home',
@@ -46,4 +47,8 @@ export class HomePage implements OnInit{
       infiniteScroll.complete();
     }, 600);
   }
+  goToPostDetails(id: number){
+    this.navCtrl.push(PostDetailsPage, {'id': id});
+  }
+
 }
