@@ -28,5 +28,8 @@ export class SiteDataServiceProvider {
     return this.http.get(this.siteUrl + 'media/'+mediaId);
   }
 
+  getPageDataById(pageId:number){
+    return this.http.get(this.siteUrl + 'pages/'+pageId);
+  }
 
 }
