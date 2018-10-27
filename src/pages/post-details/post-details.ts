@@ -13,15 +13,38 @@ export class PostDetailsPage implements OnInit{
   }
 
   ionViewDidLoad() {
-    this.postId = this.navParams.get('postId');
-    this.siteDataService.getPostDataById(this.postId).subscribe((postData)=>{
-      this.postData = postData;
-    }, (error)=>{
-      console.log(error);
-    });
+    this.loadPostData();
   }
 
   ngOnInit(){
 
   }
+
+
+  loadPostData(){
+    this.postId = this.navParams.get('postId');
+    this.siteDataService.getPostDataById(this.postId).subscribe((postData)=>{
+      this.postData = postData;
+      this.siteDataService.getUserDetailsById(this.postData.author).subscribe((authorData)=>{
+        this.postData.authorData = authorData;
+      }, (error)=> {
+        console.log(error);
+      });
+
+      this.postData.media_url = "";
+      this.siteDataService.getMediaById(this.postData.featured_media).subscribe( (mediaData: any) => {
+        this.postData.media_url = mediaData.media_details.sizes.medium.source_url ;
+      }, error => {
+        console.log(error);
+      });
+    }, (error)=>{
+      console.log(error);
+    });
+
+
+
+  }
+
+
+
 }

@@ -32,4 +32,12 @@ export class SiteDataServiceProvider {
     return this.http.get(this.siteUrl + 'pages/'+pageId);
   }
 
+  getUserDetailsById(userId: number){
+    return this.http.get(this.siteUrl + 'users/'+userId);
+  }
+
+  fetchDataByUrl(url:string){
+    return this.http.get(url);
+  }
+
 }
