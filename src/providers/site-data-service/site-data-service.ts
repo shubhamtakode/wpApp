@@ -40,4 +40,8 @@ export class SiteDataServiceProvider {
     return this.http.get(url);
   }
 
+  getCommentsByPostId(postId: number){
+    return this.http.get(this.siteUrl + 'comments?post=' + postId);
+  }
+
 }

@@ -1,35 +1,49 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>Full Post</ion-title>
-    </ion-navbar>
+  <ion-navbar>
+    <ion-title>Full Post</ion-title>
+  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-    <ion-card>
-        <img [src]="postData?.media_url" *ngIf="postData?.media_url"/>
-        <ion-card-content>
-            <ion-card-title>
-                {{postData?.title?.rendered}}
-            </ion-card-title>
-            <ion-row>
-                <ion-col>
-                    <ion-chip>
-                        <ion-label>
-                            <ion-icon name="calendar"></ion-icon>
-                            {{postData?.date | date}}
-                        </ion-label>
-                    </ion-chip>
-                </ion-col>
-                <ion-col>
-                    <ion-chip>
-                        <ion-label title="Author">
-                            <ion-icon name="contact"></ion-icon>
-                            {{this.postData?.authorData?.name}}
-                        </ion-label>
-                    </ion-chip>
-                </ion-col>
-            </ion-row>
-            <p [innerHTML]="postData?.content?.rendered"></p>
-        </ion-card-content>
-    </ion-card>
+  <ion-card>
+    <img [src]="postData?.media_url" *ngIf="postData?.media_url"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{postData?.title?.rendered}}
+      </ion-card-title>
+      <ion-row>
+        <ion-col>
+          <ion-chip>
+            <ion-label>
+              <ion-icon name="calendar"></ion-icon>
+              {{postData?.date | date}}
+            </ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col>
+          <ion-chip>
+            <ion-label title="Author">
+              <ion-icon name="contact"></ion-icon>
+              {{this.postData?.authorData?.name}}
+            </ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+      <p [innerHTML]="postData?.content?.rendered"></p>
+    </ion-card-content>
+    <div *ngIf="postData && postData.comments && postData.comments.length != 0">
+      <ion-row *ngFor="let comment of postData.comments; let i = index">
+        <ion-avatar>
+          <img [src]="comment.author_avatar_urls['24']">
+        </ion-avatar>
+        <div>
+          {{comment.author_name}}
+        </div>
+        <div>
+          {{comment.date | date: 'medium'}}
+        </div>
+        <p [innerHTML]="comment.content.rendered"></p>
+      </ion-row>
+    </div>
+  </ion-card>
 </ion-content>
