@@ -15,6 +15,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SiteDataServiceProvider } from '../providers/site-data-service/site-data-service';
 import {PostDetailsPage} from "../pages/post-details/post-details";
 import {PostDetailsPageModule} from "../pages/post-details/post-details.module";
+import { AppHttpInterceptorProvider } from '../providers/app-http-interceptor/app-http-interceptor';
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,13 @@ import {PostDetailsPageModule} from "../pages/post-details/post-details.module";
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SiteDataServiceProvider
+    SiteDataServiceProvider,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptorProvider,
+      multi: true
+    }
   ]
+
 })
 export class AppModule {}
