@@ -16,6 +16,15 @@ export class AboutPage implements OnInit{
   ngOnInit(){
     this.siteDataService.getPageDataById(104).subscribe((pageData:any)=>{
       this.aboutPageData =  pageData;
+
+      this.aboutPageData.media_url = "";
+      this.siteDataService.getMediaById(this.aboutPageData.featured_media).subscribe( (mediaData: any) => {
+        this.aboutPageData.media_url = mediaData.media_details.sizes.medium.source_url ;
+      }, error => {
+        console.log(error);
+      });
+
+
     },(error)=>{
       console.log(error);
     });

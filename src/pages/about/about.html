@@ -7,5 +7,13 @@
 </ion-header>
 
 <ion-content padding>
-  <div [innerHTML]="aboutPageData?.content?.rendered"></div>
+  <ion-card>
+    <img [src]="aboutPageData?.media_url" *ngIf="aboutPageData?.media_url"/>
+    <ion-card-content>
+      <ion-card-title>
+        {{aboutPageData?.title?.rendered}}
+      </ion-card-title>
+      <p [innerHTML]="aboutPageData?.content?.rendered"></p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

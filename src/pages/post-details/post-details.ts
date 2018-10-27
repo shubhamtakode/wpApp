@@ -30,7 +30,6 @@ export class PostDetailsPage implements OnInit{
       }, (error)=> {
         console.log(error);
       });
-
       this.postData.media_url = "";
       this.siteDataService.getMediaById(this.postData.featured_media).subscribe( (mediaData: any) => {
         this.postData.media_url = mediaData.media_details.sizes.medium.source_url ;

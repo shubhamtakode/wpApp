@@ -1,32 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Test App</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Test App</ion-title>
+    </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
- <ion-card *ngFor="let post of postDataForListing" (click)="goToPostDetails(post.id)">
-   <img [src]="post.media_url" *ngIf="post.media_url"/>
-   <ion-card-content>
-     <ion-card-title> {{post.id}} -
-      {{post.title.rendered}}
-     </ion-card-title>
-     <p [innerHTML]="post.excerpt.rendered"></p>
-   </ion-card-content>
-   <ion-row>
-     <ion-col>
-       <button ion-button icon-start clear small class="pull-right">
-         <ion-icon name="calendar"></ion-icon>
-         <div>{{post.date | date}}</div>
-       </button>
-     </ion-col>
-   </ion-row>
- </ion-card>
+    <ion-card *ngFor="let post of postDataForListing" (click)="goToPostDetails(post.id)">
+        <img [src]="post.media_url" *ngIf="post.media_url"/>
+        <ion-card-content>
+            <ion-card-title> {{post.id}} -
+                {{post.title.rendered}}
+            </ion-card-title>
+            <p [innerHTML]="post.excerpt.rendered"></p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col>
+                <ion-chip class="pull-right">
+                    <ion-label title="Published Date">
+                        <ion-icon name="calendar"></ion-icon>
+                        {{post.date | date}}
+                    </ion-label>
+                </ion-chip>
+            </ion-col>
+        </ion-row>
+    </ion-card>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
-    <ion-infinite-scroll-content></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
 
 </ion-content>

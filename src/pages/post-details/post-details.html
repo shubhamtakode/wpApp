@@ -11,20 +11,24 @@
             <ion-card-title>
                 {{postData?.title?.rendered}}
             </ion-card-title>
-            <p>
-                <ion-chip>
-                    <ion-label>
-                        <ion-icon name="calendar"></ion-icon>
-                        {{postData?.date | date}}
-                    </ion-label>
-                </ion-chip>
-                <ion-chip>
-                    <ion-label title="Author">
-                        <ion-icon name="contact"></ion-icon>
-                        {{this.postData?.authorData?.name}}
-                    </ion-label>
-                </ion-chip>
-            </p>
+            <ion-row>
+                <ion-col>
+                    <ion-chip>
+                        <ion-label>
+                            <ion-icon name="calendar"></ion-icon>
+                            {{postData?.date | date}}
+                        </ion-label>
+                    </ion-chip>
+                </ion-col>
+                <ion-col>
+                    <ion-chip>
+                        <ion-label title="Author">
+                            <ion-icon name="contact"></ion-icon>
+                            {{this.postData?.authorData?.name}}
+                        </ion-label>
+                    </ion-chip>
+                </ion-col>
+            </ion-row>
             <p [innerHTML]="postData?.content?.rendered"></p>
         </ion-card-content>
     </ion-card>
