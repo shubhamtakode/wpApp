@@ -1,12 +1,10 @@
 <ion-header>
-
   <ion-navbar>
-    <ion-title>{{post.title}}</ion-title>
+    <ion-title><marquee>{{postData?.title?.rendered}}</marquee></ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-<div [innerHtml]="post.contents"></div>
+  <div [innerHTML]="postData?.content?.rendered"></div>
 </ion-content>

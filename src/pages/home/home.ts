@@ -28,7 +28,6 @@ export class HomePage implements OnInit{
     });
   }
 
-
   getAndAssociateMediaUrlToPost(postData){
     postData.media_url = "";
     this.siteDataService.getMediaById(postData.featured_media).subscribe( (mediaData: any) => {
@@ -38,17 +37,16 @@ export class HomePage implements OnInit{
     });
   }
 
-
   doInfinite(infiniteScroll) {
     setTimeout(() => {
       this.pageNumber++;
       this.loadPostData();
       console.log('Async operation has ended');
       infiniteScroll.complete();
-    }, 600);
+    }, 200);
   }
   goToPostDetails(id: number){
-    this.navCtrl.push(PostDetailsPage, {'id': id});
+    this.navCtrl.push(PostDetailsPage, {'postId': id});
   }
 
 }

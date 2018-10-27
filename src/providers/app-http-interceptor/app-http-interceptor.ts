@@ -15,12 +15,12 @@ import {LoadingController} from 'ionic-angular';
 export class AppHttpInterceptorProvider implements HttpInterceptor{
 
   loader: any;
-  constructor(public http: HttpClient, loadingCtrl: LoadingController) {
+  constructor(public http: HttpClient, private loadingCtrl: LoadingController) {
     console.log('Hello AppHttpInterceptorProvider Provider');
-    this.loader = loadingCtrl.create({
-        /*content: 'Please wait...',*/
-        spinner: 'ios'
-    });
+      this.loader = this.loadingCtrl.create({
+          /*content: 'Please wait...',*/
+          spinner: 'ios'
+      });
   }
 
 
@@ -33,7 +33,12 @@ export class AppHttpInterceptorProvider implements HttpInterceptor{
       /*const updatedRequest = request.clone({
        headers: request.headers.set("Authorization", "Some-dummyCode")
        });*/
-
+      if(!this.loader){
+          this.loader = this.loadingCtrl.create({
+              /*content: 'Please wait...',*/
+              spinner: 'ios'
+          });
+      }
       this.loader.present();
 
       //logging the updated Parameters to browser's console
@@ -43,14 +48,12 @@ export class AppHttpInterceptorProvider implements HttpInterceptor{
           tap(
               event => {
                   //logging the http response to browser's console in case of a success
-                  if(event instanceof HttpRequest){
-                      console.log("request :", event);
-                  }
                   if (event instanceof HttpResponse) {
-                      setTimeout(() => {
+                      if(this.loader){
                           this.loader.dismiss();
-                      }, 1000);
-                      console.log("api call success :", event);
+                          this.loader = null;
+                      }
+                      //console.log("api call success :", event);
                   }
               },
               error => {
