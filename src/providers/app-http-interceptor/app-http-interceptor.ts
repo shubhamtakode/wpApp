@@ -48,8 +48,8 @@ export class AppHttpInterceptorProvider implements HttpInterceptor{
                   }
                   if (event instanceof HttpResponse) {
                       setTimeout(() => {
-                          //this.loader.dismiss();
-                      }, 3000);
+                          this.loader.dismiss();
+                      }, 1000);
                       console.log("api call success :", event);
                   }
               },
