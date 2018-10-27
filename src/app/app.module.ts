@@ -28,7 +28,12 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp,
+      {
+        backButtonText: '',
+        backButtonIcon: 'ios-arrow-back',
+        iconMode: 'md'
+      }),
     HttpClientModule,
     PostDetailsPageModule
   ],
