@@ -23,7 +23,6 @@ export class AppHttpInterceptorProvider implements HttpInterceptor{
       });
   }
 
-
   //function which will be called for all http calls
   intercept(
       request: HttpRequest<any>,
@@ -59,6 +58,10 @@ export class AppHttpInterceptorProvider implements HttpInterceptor{
               error => {
                   //logging the http response to browser's console in case of a failuer
                   if (error instanceof HttpResponse) {
+                      if(this.loader){
+                          this.loader.dismiss();
+                          this.loader = null;
+                      }
                       console.log("api call error :", event);
                   }
               }

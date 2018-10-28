@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {Observable} from "rxjs";
 
 /*
   Generated class for the SiteDataServiceProvider provider.
@@ -11,13 +12,32 @@ import { Injectable } from '@angular/core';
 export class SiteDataServiceProvider {
 
   siteUrl: string;
+  postsDataForListingByPage: any;
+
   constructor(public http: HttpClient) {
     console.log('Hello SiteDataServiceProvider Provider');
     this.siteUrl = "https://www.shubhsblog.com/wp-json/wp/v2/";
+    this.postsDataForListingByPage = {};
   }
 
   getAllPostsDataByPage(pageNumber: number) {
-    return this.http.get(this.siteUrl + 'posts/?page='+pageNumber+'&context=embed');
+    if(this.postsDataForListingByPage[pageNumber]){
+      return Observable.create(observer => {
+        observer.next(this.postsDataForListingByPage[pageNumber]);
+        observer.complete();
+      });
+    }else{
+      return this.http.get(this.siteUrl + 'posts/?page='+pageNumber+'&context=embed').map(
+          (response) => {
+            this.postsDataForListingByPage[pageNumber] = response;
+            return response;
+          }
+      ).catch(
+          (error) => {
+            return Observable.throw(error);
+          }
+      );
+    }
   }
 
   getPostDataById(postId: number){

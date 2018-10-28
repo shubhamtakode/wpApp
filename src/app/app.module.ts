@@ -17,6 +17,7 @@ import {PostDetailsPage} from "../pages/post-details/post-details";
 import {PostDetailsPageModule} from "../pages/post-details/post-details.module";
 import { AppHttpInterceptorProvider } from '../providers/app-http-interceptor/app-http-interceptor';
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {OrderByPipe} from "../pipes/order-by/order-by";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    OrderByPipe
   ],
   imports: [
     BrowserModule,

@@ -1,34 +1,70 @@
 <ion-header>
     <ion-navbar>
-        <ion-title>Test App</ion-title>
+        <ion-title>Test App {{postDataForListing?.length}}- {{pageNumber}}</ion-title>
     </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-    <ion-card *ngFor="let post of postDataForListing" (click)="goToPostDetails(post.id)">
-        <img [src]="post.media_url" *ngIf="post.media_url"/>
+    <ion-list [virtualScroll]="postDataForListing" approxItemWidth="98%" bufferRatio="2" approxItemHeight="600px">
+        <div *virtualItem="let post">
+            <ion-card  (click)="goToPostDetails(post?.id)">
+                <img [src]="post?.media_url" *ngIf="post?.media_url">
+                <ion-card-content>
+                    <ion-card-title>
+                        {{post?.title?.rendered}}
+                    </ion-card-title>
+                     <p [innerHTML]="post?.excerpt?.rendered"></p>
+                </ion-card-content>
+                <ion-row>
+                    <ion-col>
+                        <ion-chip class="pull-right">
+                            <ion-label title="Published Date">
+                                <ion-icon name="calendar"></ion-icon>
+                                {{post?.date | date}}
+                            </ion-label>
+                        </ion-chip>
+                    </ion-col>
+                </ion-row>
+            </ion-card>
+        </div>
+
+    </ion-list>
+
+    <!--<ion-card *ngFor="let post of (postDataForListing | orderBy : 'date': true) ; let i=index" (click)="goToPostDetails(post?.id)">
+        <ion-img [src]="post?.media_url" *ngIf="post?.media_url" width="80" height="80"></ion-img>
         <ion-card-content>
-            <ion-card-title> {{post.id}} -
-                {{post.title.rendered}}
+            <ion-card-title> {{post?.id}} -
+                {{post?.title?.rendered}}
             </ion-card-title>
-            <p [innerHTML]="post.excerpt.rendered"></p>
+            <p [innerHTML]="post?.excerpt?.rendered"></p>
         </ion-card-content>
         <ion-row>
             <ion-col>
                 <ion-chip class="pull-right">
                     <ion-label title="Published Date">
                         <ion-icon name="calendar"></ion-icon>
-                        {{post.date | date}}
+                        {{post?.date | date}}
                     </ion-label>
                 </ion-chip>
             </ion-col>
         </ion-row>
-    </ion-card>
+    </ion-card>-->
 
-    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+   <!--<ion-row>
+        <ion-col text-center>
+            <button (click)="loadMore()" ion-button round>Load More</button>
+        </ion-col>
+    </ion-row>-->
+
+
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
         <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
 
+
+   <!-- <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>-->
 </ion-content>
