@@ -6,8 +6,9 @@
 
 <ion-content padding>
 
-    <ion-list [virtualScroll]="postDataForListing" approxItemWidth="98%" bufferRatio="2" approxItemHeight="600px">
-        <div *virtualItem="let post">
+    <!--<ion-list [virtualScroll]="postDataForListing" approxItemWidth="98%" bufferRatio="2" approxItemHeight="600px">-->
+        <!--<div *virtualItem="let post">-->
+  <ion-list *ngFor="let post of postDataForListing">
             <ion-card  (click)="goToPostDetails(post?.id)">
                 <img [src]="post?.media_url" *ngIf="post?.media_url">
                 <ion-card-content>
@@ -27,7 +28,7 @@
                     </ion-col>
                 </ion-row>
             </ion-card>
-        </div>
+        <!--</div>-->
 
     </ion-list>
 
