@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
+import {config} from "../../config/app-config";
 
 /*
   Generated class for the SiteDataServiceProvider provider.
@@ -16,7 +17,7 @@ export class SiteDataServiceProvider {
 
   constructor(public http: HttpClient) {
     console.log('Hello SiteDataServiceProvider Provider');
-    this.siteUrl = "https://www.shubhsblog.com/wp-json/wp/v2/";
+    this.siteUrl = config.siteUrl;
     this.postsDataForListingByPage = {};
   }
 

@@ -31,18 +31,20 @@
       </ion-row>
       <p [innerHTML]="postData?.content?.rendered"></p>
     </ion-card-content>
-    <div *ngIf="postData && postData.comments && postData.comments.length != 0">
-      <ion-row *ngFor="let comment of postData.comments; let i = index">
-        <ion-avatar>
+    <div class="post-comment-section" *ngIf="postData && postData.comments && postData.comments.length != 0">
+      <ion-row class="post-comment-wrapper" *ngFor="let comment of postData.comments; let i = index">
+        <ion-avatar class="comment-avatar">
           <img [src]="comment.author_avatar_urls['24']">
         </ion-avatar>
-        <div>
-          {{comment.author_name}}
+        <div class="comment-block">
+          <div class="commenter">
+            {{comment.author_name}}
+          </div>
+          <div class="date-time">
+            {{comment.date | date: 'medium'}}
+          </div>
+          <p class="text" [innerHTML]="comment.content.rendered"></p>
         </div>
-        <div>
-          {{comment.date | date: 'medium'}}
-        </div>
-        <p [innerHTML]="comment.content.rendered"></p>
       </ion-row>
     </div>
   </ion-card>
